@@ -1,0 +1,16 @@
+[Unit]
+Description=Cloudflare Tunnel for Instagram Automation Bot
+Wants=network-online.target instagram-guide-bot.service
+After=network-online.target instagram-guide-bot.service
+
+[Service]
+Type=simple
+WorkingDirectory=__PROJECT_DIR__
+ExecStart=/usr/bin/cloudflared tunnel --config __CLOUDFLARED_CONFIG__ run instagram-guide-bot
+Restart=always
+RestartSec=5
+TimeoutStopSec=15
+UMask=0077
+
+[Install]
+WantedBy=default.target
